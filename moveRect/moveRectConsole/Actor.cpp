@@ -54,10 +54,11 @@ int32_t moveRectconsole::Actor::init()
 int32_t moveRectconsole::Actor::move()
 {
 	char input = getInput();
-	if (input == 87 || input == 119) { pos.Y--; } // W,w
-	if (input == 65 || input == 97) { pos.X--; } // A,a
-	if (input == 83 || input == 115) { pos.Y++; } // S,s
-	if (input == 68 || input == 100) { pos.X++; } // D,d
+	if ((GetAsyncKeyState(87) & 0x0001) || GetAsyncKeyState(119) & 0x0001) { pos.Y--; } // W,w
+	if ((GetAsyncKeyState(65) & 0x0001) || GetAsyncKeyState(97) & 0x0001) { pos.X--; } // W,w
+	if ((GetAsyncKeyState(83) & 0x0001) || GetAsyncKeyState(115) & 0x0001) { pos.Y++; } // W,w
+	if ((GetAsyncKeyState(68) & 0x0001) || GetAsyncKeyState(100) & 0x0001) { pos.X++; } // W,w
+
 	pos.X = pos.X < 0 ? 0 : pos.X;
 	pos.Y = pos.Y < 0 ? 0 : pos.Y;
 
