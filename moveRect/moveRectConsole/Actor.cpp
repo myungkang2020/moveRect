@@ -21,11 +21,9 @@ int32_t moveRectconsole::Actor::update()
 
 int32_t moveRectconsole::Actor::Display()
 {
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), headPos);
+	COORD cursorPos = { bodyPos.front().first, bodyPos.front().second };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPos);
 	std::cout << 'o' << std::endl;
-
-
-
 	return int32_t(0);
 }
 
@@ -107,13 +105,16 @@ int32_t moveRectconsole::Actor::saveBodyPosData()
 	if (bodyPos.at(0).first != headPos.X || bodyPos.at(0).second != headPos.Y)
 	{
 		bodyPos.push_front({ headPos.X, headPos.Y });
-		if (nowBodyLength < currentBodyLength) { isPrevAddBody = true; }
-		else {
+
+		while (nowBodyLength > currentBodyLength)
+		{
 			COORD prevPos = { bodyPos.back().first, bodyPos.back().second };
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), prevPos);
 			std::cout << " " << std::endl;
 			bodyPos.pop_back();
+			nowBodyLength = bodyPos.size();
 		}
+
 	}
 
 
