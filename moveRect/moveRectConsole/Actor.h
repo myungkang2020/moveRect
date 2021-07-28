@@ -2,6 +2,9 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+#include <deque>
+#include <algorithm>
+#include <chrono>
 
 namespace moveRectconsole {
 
@@ -22,7 +25,15 @@ namespace moveRectconsole {
 		int32_t move();
 		char getInput();
 
-		COORD pos;
+		int32_t saveBodyPosData();
+
+		COORD headPos;
+		std::deque<std::pair<uint32_t, uint32_t>> bodyPos;
+		uint32_t currentBodyLength;
+		bool isPrevAddBody;
+		const uint32_t maxBodyLength = 50;
+		std::chrono::system_clock::time_point prevFrameTime;
+		
 		char input;
 	};
 }

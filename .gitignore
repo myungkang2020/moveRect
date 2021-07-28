@@ -1,7 +1,7 @@
 .vs/
-# garbage
 *.tlog
-+.idb
+*.idb
+*.enc
 
 # Prerequisites
 *.d
