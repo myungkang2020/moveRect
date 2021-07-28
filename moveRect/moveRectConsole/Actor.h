@@ -7,11 +7,6 @@
 #include <chrono>
 
 namespace moveRectconsole {
-
-	typedef struct vec2 {
-		int32_t x, y;
-	}vec2;
-
 	class Actor
 	{
 	public:
@@ -20,20 +15,25 @@ namespace moveRectconsole {
 
 	private:
 		int32_t Display();
-
 		int32_t init();
-		int32_t move();
-		char getInput();
+		void removeCursorFlicker();
+		void initBodyDisplay();
+		void DisplayBoundary();
+		int32_t inputHandler();
+		void moveHead();
 
-		int32_t saveBodyPosData();
+		int32_t changeBodyLength();
 
 		COORD headPos;
+		uint16_t curMoveWay;
 		std::deque<std::pair<uint32_t, uint32_t>> bodyPos;
 		uint32_t currentBodyLength;
 		bool isPrevAddBody;
 		const uint32_t maxBodyLength = 50;
-		std::chrono::system_clock::time_point prevFrameTime;
-		
+
+		int32_t width, height;
+
+		std::chrono::system_clock::time_point prevFrameTime;		
 		char input;
 	};
 }
